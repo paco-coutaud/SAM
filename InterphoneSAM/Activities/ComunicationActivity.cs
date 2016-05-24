@@ -20,10 +20,8 @@ namespace InterphoneSAM
     public class ComunicationActivity : Activity 
     {
         private TCPServeur _tcpServeur;
-        private Thread tcpStart;
-        private Thread tcpState;
+        //private Thread tcpState;
         private Thread checkHandicap;
-        private TextView _stateTCP;
         private string _handicapClient;
         private bool _getHandicapClient;
         protected override void OnCreate(Bundle bundle)
@@ -35,15 +33,12 @@ namespace InterphoneSAM
             { 
                 FragmentManager.BeginTransaction().Add(Resource.Id.container, CameraFragment.NewInstance()).Commit();
             }
-            _stateTCP = FindViewById<TextView>(Resource.Id.stateTCP);
+            _tcpServeur = MenuActivity.tcpServeur;
 
-            _tcpServeur = new TCPServeur("192.168.43.117", 1234);
+            //_tcpServeur = new TCPServeur("192.168.43.117", 1234);
 
-            tcpStart = new Thread(tcpStartFunction);
-            tcpStart.Start();
-
-            tcpState = new Thread(tcpStateFunction);
-            tcpState.Start();
+            //tcpState = new Thread(tcpStateFunction);
+            //tcpState.Start();
 
             _getHandicapClient = false;
 
@@ -53,7 +48,7 @@ namespace InterphoneSAM
             CrossTextToSpeech.Current.Speak("Initialisation complétée");
         }
 
-        private void tcpStateFunction()
+        /*private void tcpStateFunction()
         {
             while (tcpState.IsAlive)
             {
@@ -65,12 +60,7 @@ namespace InterphoneSAM
         private void update()
         {
             _stateTCP.Text = "State : " + _tcpServeur._state;
-        }
-        private void tcpStartFunction()
-        {
-            //Demarrage du serveur TCP
-            _tcpServeur.start();
-        }
+        }*/
 
         private void checkHandicapFunction()
         {
@@ -80,7 +70,7 @@ namespace InterphoneSAM
                 System.Diagnostics.Debug.WriteLine(_tcpServeur._state);
                 if(_tcpServeur._state == "listener opened - client connected - ready")
                 {
-                    _handicapClient = _tcpServeur.receiveData();
+                    _handicapClient = _tcpServeur.phrase;
                     _getHandicapClient = true;
                     System.Diagnostics.Debug.WriteLine(_handicapClient);
                     CrossTextToSpeech.Current.Speak("Le Client est " + _handicapClient);

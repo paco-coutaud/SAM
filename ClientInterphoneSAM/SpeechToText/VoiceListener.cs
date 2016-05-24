@@ -12,20 +12,19 @@ using Android.Widget;
 using Android.Speech;
 using System.Collections;
 
-namespace Speech
+namespace InterphoneSAM
 {
     class VoiceListener: Java.Lang.Object, Android.Speech.IRecognitionListener
     {
         private Context _context;
-        private TextView _v;
         private List<string> data;
-        private string _varSpeech;
+        public string _varSpeech;
 
         public VoiceListener(Context context, string varSpeech)
         {
             data = new List<string>();
             _context = context;
-            _varSpeech = varSpeech;
+            _varSpeech = "";
         }
 
         public void OnReadyForSpeech(Bundle paramss) { System.Diagnostics.Debug.WriteLine("HELLO2"); }
@@ -42,9 +41,10 @@ namespace Speech
             }
             public void OnResults(Bundle results)
             {
-            data = results.GetStringArrayList(SpeechRecognizer.ResultsRecognition).ToList();
-            System.Diagnostics.Debug.WriteLine(data[0]);
-            _varSpeech = data[0];
+                data = results.GetStringArrayList(SpeechRecognizer.ResultsRecognition).ToList();
+                System.Diagnostics.Debug.WriteLine(data[0]);
+                _varSpeech = data[0];
+                System.Diagnostics.Debug.WriteLine(_varSpeech);
             }
             public void OnPartialResults(Bundle partialResults) { }
             public void OnEvent(int eventType, Bundle paramss) { }

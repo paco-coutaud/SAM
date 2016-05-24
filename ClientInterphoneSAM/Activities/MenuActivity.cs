@@ -17,6 +17,8 @@ namespace InterphoneSAM
     [Activity(Label = "InterphoneSam",MainLauncher = true)]
     public class MenuActivity : Activity
     {
+        public static TCPClient tcpClient = new TCPClient("192.168.43.117", 1234);
+
         private Intent _intentNextActivity;
         private string _choice; //Chaine de caractere permettant d'enregistrer le handicap/non handicap de la personne côté maison
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,22 +41,25 @@ namespace InterphoneSAM
         private void buttonSrdMtClick(object sender, EventArgs e)
         {
             _choice = "Sourd-Muet";
-            _intentNextActivity.PutExtra("choice", _choice);
-            StartActivity(_intentNextActivity);
+            Intent intent = new Intent(this, typeof(CommunicationDeafMute));
+            //intent.PutExtra("choice", _choice);
+            StartActivity(intent);
         }
 
         private void buttonMalVtClick(object sender, EventArgs e)
         {
             _choice = "Mal-Voyant";
-            _intentNextActivity.PutExtra("choice", _choice);
-            StartActivity(_intentNextActivity);
+            Intent intent = new Intent(this, typeof(CommunicationBlindNormal));
+            //intent.PutExtra("choice", _choice);
+            StartActivity(intent);
         }
 
         private void buttonPasHcpClick(object sender, EventArgs e)
         {
             _choice = "Sans handicap";
-            _intentNextActivity.PutExtra("choice", _choice);
-            StartActivity(_intentNextActivity);
+            Intent intent = new Intent(this, typeof(CommunicationBlindNormal));
+            //intent.PutExtra("choice", _choice);
+            StartActivity(intent);
         }
     }
 }

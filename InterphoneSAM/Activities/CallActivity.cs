@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Tcp;
 
 namespace InterphoneSAM
 {
@@ -24,7 +25,7 @@ namespace InterphoneSAM
             Intent intent = Intent;
             _choice = intent.GetStringExtra("choice");
 
-            SetContentView(Resource.Layout.Call_Activity);///comentaire
+            SetContentView(Resource.Layout.Call_Activity);
 
             System.Diagnostics.Debug.WriteLine(_choice);
 
@@ -38,7 +39,19 @@ namespace InterphoneSAM
 
         private void button1Click(Object sender, EventArgs e)
         {
-            StartActivity(intentNextActivity);
+            if(_choice == "Sourd-Muet")
+            {
+                Intent intent = new Intent(this, typeof(CommunicationDeafMute));
+                intent.PutExtra("choice", _choice);
+                StartActivity(intent);
+            }
+            else
+            {
+                Intent intent = new Intent(this, typeof(CommunicationBlindNormal));
+                intent.PutExtra("choice", _choice);
+                StartActivity(intent);
+            }
+            //StartActivity(intentNextActivity);
         }
     }
 }

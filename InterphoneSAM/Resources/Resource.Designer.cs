@@ -62,14 +62,14 @@ namespace InterphoneSAM
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050006
-			public const int MalVt = 2131034118;
+			// aapt resource value: 0x7f05000a
+			public const int MalVt = 2131034122;
 			
-			// aapt resource value: 0x7f050007
-			public const int PasHcp = 2131034119;
+			// aapt resource value: 0x7f05000b
+			public const int PasHcp = 2131034123;
 			
-			// aapt resource value: 0x7f050005
-			public const int SrdMt = 2131034117;
+			// aapt resource value: 0x7f050009
+			public const int SrdMt = 2131034121;
 			
 			// aapt resource value: 0x7f050000
 			public const int button1 = 2131034112;
@@ -77,14 +77,26 @@ namespace InterphoneSAM
 			// aapt resource value: 0x7f050001
 			public const int container = 2131034113;
 			
+			// aapt resource value: 0x7f050008
+			public const int editMessage = 2131034120;
+			
 			// aapt resource value: 0x7f050004
-			public const int editMessage = 2131034116;
+			public const int sendTextButton = 2131034116;
+			
+			// aapt resource value: 0x7f050003
+			public const int speakButton = 2131034115;
 			
 			// aapt resource value: 0x7f050002
 			public const int stateTCP = 2131034114;
 			
-			// aapt resource value: 0x7f050003
-			public const int texture = 2131034115;
+			// aapt resource value: 0x7f050006
+			public const int textToReceive = 2131034118;
+			
+			// aapt resource value: 0x7f050005
+			public const int textToSend = 2131034117;
+			
+			// aapt resource value: 0x7f050007
+			public const int texture = 2131034119;
 			
 			static Id()
 			{
@@ -106,10 +118,16 @@ namespace InterphoneSAM
 			public const int Communication_Activity = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int fragment_camera = 2130903042;
+			public const int CommunicationBlindNormal = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Menu_Activity = 2130903043;
+			public const int CommunicationDeafMute = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int fragment_camera = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int Menu_Activity = 2130903045;
 			
 			static Layout()
 			{

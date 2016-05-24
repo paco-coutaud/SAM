@@ -28,6 +28,7 @@ namespace InterphoneSAM
             Intent intent = Intent;
             _choice = intent.GetStringExtra("choice");
 
+            _tcpClient = MenuActivity.tcpClient;
             SetContentView(Resource.Layout.Communication_Activity);
 
             if (bundle == null)
@@ -36,8 +37,8 @@ namespace InterphoneSAM
                 FragmentManager.BeginTransaction().Add(Resource.Id.container, CameraFragment.NewInstance()).Commit();
             }
 
-            _tcpClient = new TCPClient("192.168.43.117", 1234); //Instanciation de l'objet TCPClient(adresse serveur, port d'écoute).
-            System.Threading.Thread.Sleep(10);
+           // _tcpClient = new TCPClient("192.168.43.117", 1234); //Instanciation de l'objet TCPClient(adresse serveur, port d'écoute).
+            //System.Threading.Thread.Sleep(10);
             _tcpClient.sendText(_choice);
             //CrossTextToSpeech.Current.Speak("Client " + _choice);
         }
