@@ -20,7 +20,7 @@ namespace InterphoneSAM
         private List<string> data;
         public string _varSpeech;
 
-        public VoiceListener(Context context, string varSpeech)
+        public VoiceListener(Context context)
         {
             data = new List<string>();
             _context = context;

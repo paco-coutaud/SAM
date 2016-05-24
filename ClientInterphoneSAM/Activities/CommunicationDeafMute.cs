@@ -19,6 +19,7 @@ namespace InterphoneSAM
         private Button _sendTextButton;
         private EditText _textToSend;
         private TextView _textToReceive;
+        private bool boolUpdateTextToReceive;
 
         private Thread _updateTextToReceive;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -32,14 +33,22 @@ namespace InterphoneSAM
             _textToReceive = FindViewById<TextView>(Resource.Id.textToReceive);
 
             _updateTextToReceive = new Thread(updateTextToReceiveFunction);
+            boolUpdateTextToReceive = true;
             _updateTextToReceive.Start();
 
             _sendTextButton.Click += new EventHandler(sendTextButtonClick);
         }
 
+        protected override void OnStop()
+        {
+            base.OnStop();
+
+            boolUpdateTextToReceive = false;
+        }
+
         private void updateTextToReceiveFunction()
         {
-            while(_updateTextToReceive.IsAlive)
+            while(boolUpdateTextToReceive == true)
             {
                 RunOnUiThread(new Action(updateTextView));
                 Thread.Sleep(2);

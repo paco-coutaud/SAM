@@ -18,25 +18,22 @@ namespace InterphoneSAM
     [Activity(Label = "CommunicationBlind")]
     public class CommunicationBlindNormal : Activity
     {
-        private SpeechRecognizer speechRecognizer;
         private Button _speakButton;
         public string _varSpeechToText;
         private string _oldVarSpeechToText;
         private string _oldReceiveData;
         private Thread updateSendText;
         private Thread updateReceiveData;
-        private Intent intent;
-        private Context _context;
-        private VoiceListener voiceListener;
+        private SpeechToText _speechToText;
+        private bool boolUpdateReceiveDataFunction;
+        private bool boolUpdateSendText;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CommunicationBlindNormal);
 
-            voiceListener = new VoiceListener(this, _varSpeechToText);
-
-            _context = this;
+            _speechToText = new SpeechToText(this);
 
             _speakButton = FindViewById<Button>(Resource.Id.speakButton);
 
@@ -45,23 +42,27 @@ namespace InterphoneSAM
             _oldReceiveData = "";
 
             updateSendText = new Thread(sendText);
+            boolUpdateSendText = true;
             updateSendText.Start();
 
             updateReceiveData = new Thread(updateReceiveDataFunction);
+            boolUpdateReceiveDataFunction = true;
             updateReceiveData.Start();
 
             _speakButton.Click += new EventHandler(speakButtonClick);
-            initVoiceRecognizer();
         }
 
-        public void maj()
+        protected override void OnStop()
         {
+            base.OnStop();
 
+            boolUpdateReceiveDataFunction = false;
+            boolUpdateSendText = false;
         }
 
         private void updateReceiveDataFunction()
         {
-            while(updateReceiveData.IsAlive)
+            while(boolUpdateReceiveDataFunction == true)
             {
                 if(_oldReceiveData != MenuActivity.tcpClient.phrase)
                 {
@@ -74,47 +75,22 @@ namespace InterphoneSAM
         }
         private void speakButtonClick(Object sender, EventArgs e)
         {
-            if (speechRecognizer != null)
-            {
-                speechRecognizer.Cancel();
-            }
-
-            speechRecognizer.StartListening(intent);
+            _speechToText.startListening();
         }
 
         private void sendText()
         {
-            while(updateSendText.IsAlive)
+            while(boolUpdateSendText == true)
             {
-                System.Diagnostics.Debug.WriteLine(voiceListener._varSpeech);
-                if (voiceListener._varSpeech != _oldVarSpeechToText)
+                System.Diagnostics.Debug.WriteLine(_speechToText._voiceListener._varSpeech);
+                if (_speechToText._voiceListener._varSpeech != _oldVarSpeechToText)
                 {
-                    MenuActivity.tcpClient.sendText(voiceListener._varSpeech);
-                    _oldVarSpeechToText = voiceListener._varSpeech;
+                    MenuActivity.tcpClient.sendText(_speechToText._voiceListener._varSpeech);
+                    _oldVarSpeechToText = _speechToText._voiceListener._varSpeech;
                 }
 
                 Thread.Sleep(2);
             }
-        }
-
-        private SpeechRecognizer getSpeechRecognizer()
-        {
-            if (speechRecognizer == null)
-            {
-                speechRecognizer = SpeechRecognizer.CreateSpeechRecognizer(_context);
-                speechRecognizer.SetRecognitionListener(voiceListener);
-            }
-            return speechRecognizer;
-        }
-
-        private void initVoiceRecognizer()
-        {
-            speechRecognizer = getSpeechRecognizer();
-            intent = new Intent(RecognizerIntent.ActionRecognizeSpeech);
-            intent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
-            intent.PutExtra(RecognizerIntent.ExtraLanguage, "fr-FR");
-            intent.PutExtra(RecognizerIntent.ExtraCallingPackage, _context.PackageName);
-            intent.PutExtra(RecognizerIntent.ExtraMaxResults, 60);
         }
     }
 }

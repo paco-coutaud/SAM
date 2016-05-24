@@ -66,6 +66,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServeurTCP\TCPClient.cs" />
+    <Compile Include="SpeechToText\SpeechToText.cs" />
     <Compile Include="SpeechToText\VoiceListener.cs" />
   </ItemGroup>
   <ItemGroup>
