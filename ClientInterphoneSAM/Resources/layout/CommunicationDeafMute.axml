@@ -3,16 +3,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:text="Envoyer le texte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sendTextButton" />
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textToSend" />
+    <Button
+        android:text="Envoyer le texte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendTextButton"
+        android:backgroundTint="#8bc34a" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,5 +22,6 @@
         android:text="Raccrocher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/hangUp" />
+        android:id="@+id/hangUp"
+        android:backgroundTint="#f44336" />
 </LinearLayout>

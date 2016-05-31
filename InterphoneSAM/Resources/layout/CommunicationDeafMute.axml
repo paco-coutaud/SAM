@@ -3,11 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:text="Envoyer le texte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sendTextButton" />
     <EditText
         android:inputType="textMultiLine"
         android:layout_width="match_parent"
@@ -17,4 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textToReceive" />
+    <Button
+        android:text="Envoyer le texte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendTextButton"
+        android:backgroundTint="#8bc34a" />
 </LinearLayout>

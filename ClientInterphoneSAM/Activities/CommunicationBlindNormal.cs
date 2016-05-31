@@ -6,12 +6,14 @@ using Android.Widget;
 using System.Threading;
 using Refractored.Xam.TTS;
 using Speech;
+using Android.Content;
 
 namespace InterphoneSAM
 {
     [Activity(Label = "Communication (Mal-voyant)")]
     public class CommunicationBlindNormal : Activity
     {
+        private string _choice;
         private Button _speakButton; //Bouton "Appuyer et parler"
         private Button _hangUp; //Bouton "Raccrocher"
         private string _oldVarSpeechToText; //Variable de comparaison
@@ -28,7 +30,7 @@ namespace InterphoneSAM
             SetContentView(Resource.Layout.CommunicationBlindNormal); //Utilisation de la vue "CommunicationBlindNormal"
 
             _speechToText = new SpeechToText(this); //Instanciation d'un objet SpeechToText(context)
-
+            _choice = Intent.GetStringExtra("choice");
             //Recuperation des elements de la vue
             _speakButton = FindViewById<Button>(Resource.Id.speakButton);
             _hangUp = FindViewById<Button>(Resource.Id.hangUp);
@@ -64,7 +66,9 @@ namespace InterphoneSAM
         {
             //Lorsque l'on clique sur le bouton raccrocher
             MenuActivity.tcpClient.sendText("---STOP---");
-            StartActivity(typeof(WaitActivity));
+            Intent intent = new Intent(this, typeof(WaitActivity));
+            intent.PutExtra("choice", _choice);
+            StartActivity(intent);
         }
 
         private void updateReceiveDataFunction()

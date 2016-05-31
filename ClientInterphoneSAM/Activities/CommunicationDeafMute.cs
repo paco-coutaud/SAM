@@ -4,12 +4,14 @@ using Android.App;
 using Android.OS;
 using Android.Widget;
 using System.Threading;
+using Android.Content;
 
 namespace InterphoneSAM
 {
     [Activity(Label = "Communication (Sourd-muet)")]
     public class CommunicationDeafMute : Activity
     {
+        private string _choice;
         private Button _sendTextButton; //Bouton pour envoyer le texte
         private Button _hangUp; //Bouton pour raccrocher
         private EditText _textToSend; //Champ pour taper le texte à envoyer
@@ -23,12 +25,14 @@ namespace InterphoneSAM
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.CommunicationDeafMute); //Utilisation de la vue CommunicationDeafMute
-
+            _choice = Intent.GetStringExtra("choice");
             //Recuperation des elements à partir du layout
             _sendTextButton = FindViewById<Button>(Resource.Id.sendTextButton);
             _textToSend = FindViewById<EditText>(Resource.Id.textToSend);
             _textToReceive = FindViewById<TextView>(Resource.Id.textToReceive);
             _hangUp = FindViewById<Button>(Resource.Id.hangUp);
+
+            _textToSend.SetSingleLine(true);
 
             //Demarrage du thread
             _updateTextToReceive = new Thread(updateTextToReceiveFunction);
@@ -52,7 +56,9 @@ namespace InterphoneSAM
         {
             //Si le bouton raccrocher à été clické
             MenuActivity.tcpClient.sendText("---STOP---");
-            StartActivity(typeof(WaitActivity));
+            Intent intent = new Intent(this, typeof(WaitActivity));
+            intent.PutExtra("choice", _choice);
+            StartActivity(intent);
         }
 
         private void updateTextToReceiveFunction()
@@ -73,6 +79,7 @@ namespace InterphoneSAM
             if(_textToSend.Text != "")
             {
                 MenuActivity.tcpClient.sendText(_textToSend.Text); //Si l'on click sur le bouton et que le texte envoyé n'est pas vide, on l'envoie au visiteur
+                _textToSend.Text = "";
             }
         }
     }

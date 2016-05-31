@@ -8,7 +8,7 @@ using Tcp;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "Interphone SAM",MainLauncher = true)]
+    [Activity(MainLauncher = true)]
     public class MenuActivity : Activity
     {
         public static TCPClient tcpClient = new TCPClient("192.168.43.117", 1234); //Variable static, doit etre accessible de partout car il s'agit du TCPClient

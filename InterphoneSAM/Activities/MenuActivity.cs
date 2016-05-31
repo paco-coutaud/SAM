@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "Interphone SAM",MainLauncher = true)]
+    [Activity(MainLauncher = true)]
     public class MenuActivity : Activity
     {
         public static TCPServeur tcpServeur = new TCPServeur("192.168.43.117",1234); //Variable static pour le serveur TCP (Doit être accessible dans toutes les activités)

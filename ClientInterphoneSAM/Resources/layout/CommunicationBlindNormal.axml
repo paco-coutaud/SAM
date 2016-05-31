@@ -8,11 +8,13 @@
     <Button
         android:text="Appuyer et parler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/speakButton" />
+        android:layout_height="458.0dp"
+        android:id="@+id/speakButton"
+        android:backgroundTint="#8bc34a" />
     <Button
         android:text="Raccrocher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/hangUp" />
+        android:id="@+id/hangUp"
+        android:backgroundTint="#f44336" />
 </LinearLayout>

@@ -8,6 +8,10 @@
     <Button
         android:text="Appuyer et parler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/speakButton" />
+        android:layout_height="match_parent"
+        android:id="@+id/speakButton"
+        android:backgroundTint="#8bc34a"
+        android:capitalize="none"
+        android:textAllCaps="true"
+        android:textSize="25sp" />
 </LinearLayout>

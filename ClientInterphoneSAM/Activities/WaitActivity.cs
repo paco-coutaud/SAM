@@ -10,7 +10,7 @@ using Tcp;
 //ATTENTION REVOIR PASSAGE PUT EXTRA POUR DECROCHER
 namespace InterphoneSAM
 {
-    [Activity(Label = "WaitActivity")]
+    [Activity(Label = "En attente d'un visiteur")]
     public class WaitActivity : Activity
     {
         private bool stopThread;
@@ -18,6 +18,7 @@ namespace InterphoneSAM
         private Thread _updateTextToReceive;
         private Button buttonPickUp;
         private Button buttonHangUp;
+        private ImageView _imageVisitor;
         MediaPlayer mPlayer = null;
         private string _choice;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -30,6 +31,8 @@ namespace InterphoneSAM
 
             _choice = Intent.GetStringExtra("choice");
             buttonPickUp = FindViewById<Button>(Resource.Id.buttonPickUp);
+            _imageVisitor = FindViewById<ImageView>(Resource.Id.imageVisitor);
+            _imageVisitor.Visibility = Android.Views.ViewStates.Invisible;
             buttonPickUp.Visibility = Android.Views.ViewStates.Invisible;
             buttonPickUp.Click += new EventHandler(pickUpAction);
 
@@ -50,6 +53,8 @@ namespace InterphoneSAM
             keepThread = true;
             buttonHangUp.Visibility = Android.Views.ViewStates.Invisible;
             buttonPickUp.Visibility = Android.Views.ViewStates.Invisible;
+            _imageVisitor.Visibility = Android.Views.ViewStates.Invisible;
+            
         }
 
         protected override void OnStop()
@@ -87,6 +92,7 @@ namespace InterphoneSAM
                 
                 MenuActivity.tcpClient.cleanBuffer();
                 Intent intent = new Intent(this, typeof(CommunicationDeafMute));
+                intent.PutExtra("choice", _choice);
                 StartActivity(intent);
             }
             else if (_choice == "Mal-Voyant")
@@ -94,6 +100,7 @@ namespace InterphoneSAM
                
                 MenuActivity.tcpClient.cleanBuffer();
                 Intent intent = new Intent(this, typeof(CommunicationBlindNormal));
+                intent.PutExtra("choice", _choice);
                 StartActivity(intent);
             }
             else 
@@ -101,6 +108,7 @@ namespace InterphoneSAM
                 
                 MenuActivity.tcpClient.cleanBuffer();
                 Intent intent = new Intent(this, typeof(CommunicationBlindNormal));
+                intent.PutExtra("choice", _choice);
                 StartActivity(intent);
             }
         }
@@ -109,6 +117,9 @@ namespace InterphoneSAM
         {
             buttonPickUp.Visibility = Android.Views.ViewStates.Visible;
             buttonHangUp.Visibility = Android.Views.ViewStates.Visible;
+            recupererImage();
+            _imageVisitor.Visibility = Android.Views.ViewStates.Visible;
+
             if (mPlayer != null)
             {
                 mPlayer.Stop();
@@ -118,6 +129,11 @@ namespace InterphoneSAM
             mPlayer = MediaPlayer.Create(this, Resource.Raw.ring_0);
             mPlayer.Looping = true;
             mPlayer.Start();
+        }
+
+        private void recupererImage()
+        {
+           // _imageVisitor.SetImageURI=@""
         }
     }
 }

@@ -3,10 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ImageView
+        android:src="@android:drawable/ic_menu_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="440.0dp"
+        android:id="@+id/imageVisitor" />
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/progressBar1"
         android:indeterminate="true"
         android:layout_gravity="top"
@@ -19,16 +24,18 @@
         android:layout_gravity="end"
         android:id="@+id/linearLayout1">
         <Button
-            android:id="@+id/buttonPickUp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="Décrocher" />
-        <Button
             android:id="@+id/buttonHangUp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="Racrocher" />
+            android:text="Racrocher"
+            android:backgroundTint="#f44336" />
+        <Button
+            android:id="@+id/buttonPickUp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Décrocher"
+            android:backgroundTint="#8bc34a" />
     </LinearLayout>
 </LinearLayout>

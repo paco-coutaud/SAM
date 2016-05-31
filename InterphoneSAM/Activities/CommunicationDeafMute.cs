@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "CommunicationDeafMute")]
+    [Activity(Label = "Communication (Sourd-muet)")]
     public class CommunicationDeafMute : Activity
     {
         private Button _sendTextButton; //Bouton pour envoyer les données
@@ -30,6 +30,8 @@ namespace InterphoneSAM
             _sendTextButton = FindViewById<Button>(Resource.Id.sendTextButton);
             _textToSend = FindViewById<EditText>(Resource.Id.textToSend);
             _textToReceive = FindViewById<TextView>(Resource.Id.textToReceive);
+
+            _textToSend.SetSingleLine(true);
 
             _updateTextToReceive = new Thread(updateTextToReceiveFunction);
             boolUpdateTextToReceive = true;
@@ -81,6 +83,7 @@ namespace InterphoneSAM
             if(_textToSend.Text != "")
             {
                 MenuActivity.tcpServeur.sendData(_textToSend.Text); //Si on envoie pas du texte vide, on envoie le texte au client.
+                _textToSend.Text = "";
             }
         }
     }

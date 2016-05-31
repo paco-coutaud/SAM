@@ -9,7 +9,7 @@ using Tcp;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "WaitActivity")]
+    [Activity(Label = "En attente d'une réponse")]
     public class WaitActivity : Activity
     {
         private bool stopThread;

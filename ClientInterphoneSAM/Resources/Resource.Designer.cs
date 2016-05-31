@@ -74,20 +74,23 @@ namespace InterphoneSAM
 			// aapt resource value: 0x7f06000b
 			public const int buttonHangUp = 2131099659;
 			
-			// aapt resource value: 0x7f06000a
-			public const int buttonPickUp = 2131099658;
+			// aapt resource value: 0x7f06000c
+			public const int buttonPickUp = 2131099660;
 			
 			// aapt resource value: 0x7f060001
 			public const int hangUp = 2131099649;
 			
-			// aapt resource value: 0x7f060009
-			public const int linearLayout1 = 2131099657;
-			
 			// aapt resource value: 0x7f060008
-			public const int progressBar1 = 2131099656;
+			public const int imageVisitor = 2131099656;
 			
-			// aapt resource value: 0x7f060002
-			public const int sendTextButton = 2131099650;
+			// aapt resource value: 0x7f06000a
+			public const int linearLayout1 = 2131099658;
+			
+			// aapt resource value: 0x7f060009
+			public const int progressBar1 = 2131099657;
+			
+			// aapt resource value: 0x7f060003
+			public const int sendTextButton = 2131099651;
 			
 			// aapt resource value: 0x7f060000
 			public const int speakButton = 2131099648;
@@ -95,8 +98,8 @@ namespace InterphoneSAM
 			// aapt resource value: 0x7f060004
 			public const int textToReceive = 2131099652;
 			
-			// aapt resource value: 0x7f060003
-			public const int textToSend = 2131099651;
+			// aapt resource value: 0x7f060002
+			public const int textToSend = 2131099650;
 			
 			static Id()
 			{
