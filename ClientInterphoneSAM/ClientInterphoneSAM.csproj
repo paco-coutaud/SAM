@@ -58,11 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\CommunicationBlindNormal.cs" />
-    <Compile Include="Camera\AutoFitTextureView.cs" />
-    <Compile Include="Camera\CameraFragment.cs" />
-    <Compile Include="Activities\ComunicationActivity.cs" />
     <Compile Include="Activities\MenuActivity.cs" />
     <Compile Include="Activities\CommunicationDeafMute.cs" />
+    <Compile Include="Activities\WaitActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServeurTCP\TCPClient.cs" />
@@ -73,8 +71,6 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\Communication_Activity.axml" />
-    <AndroidResource Include="Resources\layout\fragment_camera.axml" />
     <AndroidResource Include="Resources\layout\Menu_Activity.axml" />
     <AndroidResource Include="Resources\layout\CommunicationDeafMute.axml">
       <SubType>AndroidResource</SubType>
@@ -82,6 +78,7 @@
     <AndroidResource Include="Resources\layout\CommunicationBlindNormal.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Wait_Activity.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -95,6 +92,7 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <AndroidResource Include="Resources\raw\ring_0.wav" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="TextToSpeechPlugin">

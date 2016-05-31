@@ -1,16 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Java.Net;
-using Java.IO;
 using System.Net.Sockets;
 using System.Net;
 using System.IO;
@@ -48,10 +35,8 @@ namespace Tcp
         {
             tcpl.Start(); //Demarre le listener (on commence à écouter)
             _state = "listener opened - waiting for client";
-            System.Diagnostics.Debug.WriteLine(_state);
             sock = tcpl.AcceptSocket(); //On accepte le socket
             _state = "listener opened - client connected";
-            System.Diagnostics.Debug.WriteLine(_state);
 
             flux = new NetworkStream(sock); //Recuperation du flux à partir du socket
             sr = new StreamReader(flux); //Instanciation du flux de lecture
@@ -63,26 +48,20 @@ namespace Tcp
             isReady = true;
 
             _state = "listener opened - client connected - ready";
-            System.Diagnostics.Debug.WriteLine(_state);
         }
 
         private void updatePhraseFunction()
         {
-            //if(sr.ReadLine() != null)
-            //{
             while(updatePhrase.IsAlive)
             {
                 phrase = sr.ReadLine();
             }
-                
-            //}
 
             Thread.Sleep(2);
         }
         public string receiveData()
         {
-            return phrase;
-            
+            return phrase;     
         }
 
         public void sendData(string text)
@@ -90,17 +69,9 @@ namespace Tcp
             sw.WriteLine(text);
             sw.Flush();
         }
-
-        public bool isAMessageWaiting()
+        public void cleanBuffer()
         {
-            if(sr.ReadLine() != "")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            phrase = "";
         }
     }
 

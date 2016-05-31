@@ -59,11 +59,9 @@
   <ItemGroup>
     <Compile Include="Activities\CommunicationBlindNormal.cs" />
     <Compile Include="Activities\CommunicationDeafMute.cs" />
-    <Compile Include="Camera\AutoFitTextureView.cs" />
     <Compile Include="Activities\CallActivity.cs" />
-    <Compile Include="Camera\CameraFragment.cs" />
-    <Compile Include="Activities\ComunicationActivity.cs" />
     <Compile Include="Activities\MenuActivity.cs" />
+    <Compile Include="Activities\WaitActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServeurTCP\TCPServer.cs" />
@@ -74,12 +72,11 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\Communication_Activity.axml" />
-    <AndroidResource Include="Resources\layout\fragment_camera.axml" />
     <AndroidResource Include="Resources\layout\Call_Activity.axml" />
     <AndroidResource Include="Resources\layout\Menu_Activity.axml" />
     <AndroidResource Include="Resources\layout\CommunicationDeafMute.axml" />
     <AndroidResource Include="Resources\layout\CommunicationBlindNormal.axml" />
+    <AndroidResource Include="Resources\layout\Wait_Activity.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />

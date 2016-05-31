@@ -62,35 +62,41 @@ namespace InterphoneSAM
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050008
-			public const int MalVt = 2131034120;
+			// aapt resource value: 0x7f060006
+			public const int MalVt = 2131099654;
 			
-			// aapt resource value: 0x7f050009
-			public const int PasHcp = 2131034121;
+			// aapt resource value: 0x7f060007
+			public const int PasHcp = 2131099655;
 			
-			// aapt resource value: 0x7f050007
-			public const int SrdMt = 2131034119;
+			// aapt resource value: 0x7f060005
+			public const int SrdMt = 2131099653;
 			
-			// aapt resource value: 0x7f050000
-			public const int container = 2131034112;
+			// aapt resource value: 0x7f06000b
+			public const int buttonHangUp = 2131099659;
 			
-			// aapt resource value: 0x7f050006
-			public const int editMessage = 2131034118;
+			// aapt resource value: 0x7f06000a
+			public const int buttonPickUp = 2131099658;
 			
-			// aapt resource value: 0x7f050002
-			public const int sendTextButton = 2131034114;
+			// aapt resource value: 0x7f060001
+			public const int hangUp = 2131099649;
 			
-			// aapt resource value: 0x7f050001
-			public const int speakButton = 2131034113;
+			// aapt resource value: 0x7f060009
+			public const int linearLayout1 = 2131099657;
 			
-			// aapt resource value: 0x7f050004
-			public const int textToReceive = 2131034116;
+			// aapt resource value: 0x7f060008
+			public const int progressBar1 = 2131099656;
 			
-			// aapt resource value: 0x7f050003
-			public const int textToSend = 2131034115;
+			// aapt resource value: 0x7f060002
+			public const int sendTextButton = 2131099650;
 			
-			// aapt resource value: 0x7f050005
-			public const int texture = 2131034117;
+			// aapt resource value: 0x7f060000
+			public const int speakButton = 2131099648;
+			
+			// aapt resource value: 0x7f060004
+			public const int textToReceive = 2131099652;
+			
+			// aapt resource value: 0x7f060003
+			public const int textToSend = 2131099651;
 			
 			static Id()
 			{
@@ -106,19 +112,16 @@ namespace InterphoneSAM
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int Communication_Activity = 2130903040;
+			public const int CommunicationBlindNormal = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int CommunicationBlindNormal = 2130903041;
+			public const int CommunicationDeafMute = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int CommunicationDeafMute = 2130903042;
+			public const int Menu_Activity = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int fragment_camera = 2130903043;
-			
-			// aapt resource value: 0x7f030004
-			public const int Menu_Activity = 2130903044;
+			public const int Wait_Activity = 2130903043;
 			
 			static Layout()
 			{
@@ -130,14 +133,30 @@ namespace InterphoneSAM
 			}
 		}
 		
+		public partial class Raw
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int ring_0 = 2130968576;
+			
+			static Raw()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Raw()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int ApplicationName = 2131034113;
 			
-			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int Hello = 2131034112;
 			
 			static String()
 			{

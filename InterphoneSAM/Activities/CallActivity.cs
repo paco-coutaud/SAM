@@ -1,57 +1,45 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
-using Tcp;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "CallActivity")]
+    [Activity(Label = "Choix du contact")]
     public class CallActivity : Activity
     {
-        private string _choice;
-        private Intent intentNextActivity;
+        private string _choice; //Contient le handicap de la personne
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            Intent intent = Intent;
-            _choice = intent.GetStringExtra("choice");
-
             SetContentView(Resource.Layout.Call_Activity);
 
-            System.Diagnostics.Debug.WriteLine(_choice);
+            Intent intent = Intent; //Récupération de l'Intent precedent
+            _choice = intent.GetStringExtra("choice"); //Recuperation du handicap de la personne
 
-            Button button1 = FindViewById<Button>(Resource.Id.button1);
+            Button button1 = FindViewById<Button>(Resource.Id.button1); //Bouton Mr Dupont
 
-            intentNextActivity = new Intent(this, typeof(ComunicationActivity));
-            intentNextActivity.PutExtra("choice", _choice);
-
-            button1.Click += new EventHandler(button1Click);
+            button1.Click += new EventHandler(button1Click); //Creation d'un evenement si le bouton est clické
         }
 
         private void button1Click(Object sender, EventArgs e)
         {
             if(_choice == "Sourd-Muet")
             {
-                Intent intent = new Intent(this, typeof(CommunicationDeafMute));
+                MenuActivity.tcpServeur.sendData("---SONNE---");
+                Intent intent = new Intent(this, typeof(WaitActivity));
                 intent.PutExtra("choice", _choice);
                 StartActivity(intent);
             }
             else
             {
-                Intent intent = new Intent(this, typeof(CommunicationBlindNormal));
+                MenuActivity.tcpServeur.sendData("---SONNE---");
+                Intent intent = new Intent(this, typeof(WaitActivity));
                 intent.PutExtra("choice", _choice);
                 StartActivity(intent);
             }
-            //StartActivity(intentNextActivity);
         }
     }
 }

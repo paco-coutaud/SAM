@@ -1,19 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Java.Net;
-using Java.IO;
 using System.Net.Sockets;
-using System.Net;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -41,7 +26,6 @@ namespace Tcp
                 flux = tcpc.GetStream();
                 sr = new StreamReader(flux);
                 sw = new StreamWriter(flux);
-                System.Diagnostics.Debug.WriteLine("initialize");
 
                 updatePhrase = new Thread(updatePhraseFunction);
                 updatePhrase.Start();
@@ -75,6 +59,11 @@ namespace Tcp
         {
             sw.WriteLine(text);
             sw.Flush();
+        }
+
+        public void cleanBuffer()
+        {
+            phrase = "";
         }
 
 

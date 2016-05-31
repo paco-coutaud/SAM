@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Tcp;
 using System.Threading;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "InterphoneSam",MainLauncher = true)]
+    [Activity(Label = "Interphone SAM",MainLauncher = true)]
     public class MenuActivity : Activity
     {
-        public static TCPServeur tcpServeur = new TCPServeur("192.168.43.117",1234);
+        public static TCPServeur tcpServeur = new TCPServeur("192.168.43.117",1234); //Variable static pour le serveur TCP (Doit être accessible dans toutes les activités)
 
         private string _choice; //Pour se souvenir du handicap de l'utilisateur
         private Thread tcpStart;

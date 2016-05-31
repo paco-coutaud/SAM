@@ -1,22 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Speech;
 
-namespace InterphoneSAM
+namespace Speech
 {
     class SpeechToText
     {
         private SpeechRecognizer speechRecognizer;
-        private SpeechToText speechToText;
         public VoiceListener _voiceListener { get; private set; }
         private Context _context;
         private Intent intent;
@@ -54,7 +43,7 @@ namespace InterphoneSAM
             intent.PutExtra(RecognizerIntent.ExtraLanguageModel, RecognizerIntent.LanguageModelFreeForm);
             intent.PutExtra(RecognizerIntent.ExtraLanguage, "fr-FR");
             intent.PutExtra(RecognizerIntent.ExtraCallingPackage, _context.PackageName);
-            intent.PutExtra(RecognizerIntent.ExtraMaxResults, 60);
+            //intent.PutExtra(RecognizerIntent.ExtraMaxResults, 60);
         }
     }
 }

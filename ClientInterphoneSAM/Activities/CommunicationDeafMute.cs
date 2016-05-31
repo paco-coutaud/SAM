@@ -1,71 +1,78 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using System.Threading;
 
 namespace InterphoneSAM
 {
-    [Activity(Label = "CommunicationDeafMute")]
+    [Activity(Label = "Communication (Sourd-muet)")]
     public class CommunicationDeafMute : Activity
     {
-        private Button _sendTextButton;
-        private EditText _textToSend;
-        private TextView _textToReceive;
-        private bool boolUpdateTextToReceive;
+        private Button _sendTextButton; //Bouton pour envoyer le texte
+        private Button _hangUp; //Bouton pour raccrocher
+        private EditText _textToSend; //Champ pour taper le texte à envoyer
+        private TextView _textToReceive; //Champ pour affiche le texte reçu
+        private bool boolUpdateTextToReceive; //Boolean pour le thread
 
-        private Thread _updateTextToReceive;
+        private Thread _updateTextToReceive; //THread de MAJ du texte reçu
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.CommunicationDeafMute);
+            SetContentView(Resource.Layout.CommunicationDeafMute); //Utilisation de la vue CommunicationDeafMute
 
+            //Recuperation des elements à partir du layout
             _sendTextButton = FindViewById<Button>(Resource.Id.sendTextButton);
             _textToSend = FindViewById<EditText>(Resource.Id.textToSend);
             _textToReceive = FindViewById<TextView>(Resource.Id.textToReceive);
+            _hangUp = FindViewById<Button>(Resource.Id.hangUp);
 
+            //Demarrage du thread
             _updateTextToReceive = new Thread(updateTextToReceiveFunction);
             boolUpdateTextToReceive = true;
             _updateTextToReceive.Start();
 
+            //Gestion de l'evenement click pour les boutons
             _sendTextButton.Click += new EventHandler(sendTextButtonClick);
+            _hangUp.Click += new EventHandler(hangUpClick);
         }
 
         protected override void OnStop()
         {
             base.OnStop();
 
+            //Pour arreter le thread lorsque l'on quitte l'activité
             boolUpdateTextToReceive = false;
+        }
+
+        private void hangUpClick(Object sender, EventArgs e)
+        {
+            //Si le bouton raccrocher à été clické
+            MenuActivity.tcpClient.sendText("---STOP---");
+            StartActivity(typeof(WaitActivity));
         }
 
         private void updateTextToReceiveFunction()
         {
             while(boolUpdateTextToReceive == true)
             {
-                RunOnUiThread(new Action(updateTextView));
-                Thread.Sleep(2);
+                RunOnUiThread(new Action(updateTextView)); //Pour lancer dans le thread principal (Tres important pour la modification d'éléments crées dans le thread principal)
+                Thread.Sleep(2); //Pause pour ne pas saturer l'application
             }
         }
         private void updateTextView()
         {
-                System.Diagnostics.Debug.WriteLine("UPDATE TEXT VIEW");
-                _textToReceive.Text = MenuActivity.tcpClient.phrase;
+                _textToReceive.Text = MenuActivity.tcpClient.phrase; //Mise à jour de la textView avec la nouvelle phrase reçue
         }
 
         private void sendTextButtonClick(Object sender, EventArgs e)
         {
             if(_textToSend.Text != "")
             {
-                MenuActivity.tcpClient.sendText(_textToSend.Text);
-                System.Diagnostics.Debug.WriteLine("send text");
+                MenuActivity.tcpClient.sendText(_textToSend.Text); //Si l'on click sur le bouton et que le texte envoyé n'est pas vide, on l'envoie au visiteur
             }
         }
     }
