@@ -13,7 +13,7 @@ namespace InterphoneSAM
     [Activity(Label = "Communication (Mal-voyant)")]
     public class CommunicationBlindNormal : Activity
     {
-        private string _choice;
+        private string _choice; //Handicap de l'utilisateur
         private Button _speakButton; //Bouton "Appuyer et parler"
         private Button _hangUp; //Bouton "Raccrocher"
         private string _oldVarSpeechToText; //Variable de comparaison
@@ -24,13 +24,16 @@ namespace InterphoneSAM
         private bool boolUpdateReceiveDataFunction; //Variable booleene pour les threads
         private bool boolUpdateSendText; //Variable booleene pour les threads
 
+        //Lorsque l'on rentre dans l'activité, cette méthode est appelée directement.
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.CommunicationBlindNormal); //Utilisation de la vue "CommunicationBlindNormal"
 
             _speechToText = new SpeechToText(this); //Instanciation d'un objet SpeechToText(context)
+
             _choice = Intent.GetStringExtra("choice");
+
             //Recuperation des elements de la vue
             _speakButton = FindViewById<Button>(Resource.Id.speakButton);
             _hangUp = FindViewById<Button>(Resource.Id.hangUp);
@@ -53,6 +56,7 @@ namespace InterphoneSAM
             _hangUp.Click += new EventHandler(hangUpClick);
         }
 
+        //Lorsque l'on quite l'activité, cette méthode est appelée.
         protected override void OnStop()
         {
             base.OnStop();
@@ -62,6 +66,7 @@ namespace InterphoneSAM
             boolUpdateSendText = false;
         }
 
+        //Si l'utilisateur clique sur le bouton "Raccrocher"
         private void hangUpClick(Object sender, EventArgs e)
         {
             //Lorsque l'on clique sur le bouton raccrocher
@@ -71,6 +76,7 @@ namespace InterphoneSAM
             StartActivity(intent);
         }
 
+        //Thread de MAJ des données reçues
         private void updateReceiveDataFunction()
         {
             while(boolUpdateReceiveDataFunction == true)
@@ -84,11 +90,14 @@ namespace InterphoneSAM
                 Thread.Sleep(2); //Pause du thread pour ne pas saturer l'application
             }
         }
+
+        //Si l'utilisateur clique sur le bouton "Appuyer et parler".
         private void speakButtonClick(Object sender, EventArgs e)
         {
             _speechToText.startListening(); //Pour commencer l'écoute
         }
 
+        //THread de MAJ de l'envoie de texte.
         private void sendText()
         {
             while(boolUpdateSendText == true)

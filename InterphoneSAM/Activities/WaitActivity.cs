@@ -37,7 +37,7 @@ namespace InterphoneSAM
                     stopThread = true;
                     RunOnUiThread(new Action(PickUpAction));
                 }
-                else if (MenuActivity.tcpServeur.phrase == "---RACROCHE---")
+                else if (MenuActivity.tcpServeur.phrase == "---RACCROCHE---")
                 {
                     stopThread = true;
                     MenuActivity.tcpServeur.cleanBuffer();

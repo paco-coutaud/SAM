@@ -3,23 +3,33 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="440.0dp"
-        android:id="@+id/imageVisitor" />
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/progressBar1"
-        android:indeterminate="true"
-        android:layout_gravity="top"
-        android:layout_weight="0.5" />
+        android:layout_weight="10"
+        android:gravity="bottom"
+        android:layout_gravity="end">
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/progressBar1"
+            android:indeterminate="true"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="0.5" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageVisitor" />
+    </RelativeLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="90"
         android:gravity="bottom"
         android:layout_gravity="end"
         android:id="@+id/linearLayout1">

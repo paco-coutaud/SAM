@@ -11,7 +11,7 @@ namespace InterphoneSAM
     [Activity(Label = "Communication (Sourd-muet)")]
     public class CommunicationDeafMute : Activity
     {
-        private string _choice;
+        private string _choice; //Handicap de l'utilisateur
         private Button _sendTextButton; //Bouton pour envoyer le texte
         private Button _hangUp; //Bouton pour raccrocher
         private EditText _textToSend; //Champ pour taper le texte à envoyer
@@ -20,6 +20,7 @@ namespace InterphoneSAM
 
         private Thread _updateTextToReceive; //THread de MAJ du texte reçu
 
+        //Lorsque l'on rentre dans l'activité, cette méthode est appelée directement.
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -44,6 +45,7 @@ namespace InterphoneSAM
             _hangUp.Click += new EventHandler(hangUpClick);
         }
 
+        //Lorsque l'on quite l'activité, cette méthode est appelée.
         protected override void OnStop()
         {
             base.OnStop();
@@ -52,6 +54,7 @@ namespace InterphoneSAM
             boolUpdateTextToReceive = false;
         }
 
+        //Si l'utilisateur clique sur le bouton "Raccrocher"
         private void hangUpClick(Object sender, EventArgs e)
         {
             //Si le bouton raccrocher à été clické
@@ -61,6 +64,7 @@ namespace InterphoneSAM
             StartActivity(intent);
         }
 
+        //Thread de MAJ des données reçues
         private void updateTextToReceiveFunction()
         {
             while(boolUpdateTextToReceive == true)
@@ -74,6 +78,7 @@ namespace InterphoneSAM
                 _textToReceive.Text = MenuActivity.tcpClient.phrase; //Mise à jour de la textView avec la nouvelle phrase reçue
         }
 
+        //Si l'utilisateur clique sur le bouton "Envoyer le texte"
         private void sendTextButtonClick(Object sender, EventArgs e)
         {
             if(_textToSend.Text != "")

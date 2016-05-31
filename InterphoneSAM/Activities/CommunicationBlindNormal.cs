@@ -94,7 +94,6 @@ namespace InterphoneSAM
         {
             while(boolUpdateSendText == true)
             {
-                System.Diagnostics.Debug.WriteLine(_speechToText._voiceListener._varSpeech);
                 if (_speechToText._voiceListener._varSpeech != _oldVarSpeechToText) //Si la phrase prononcée est differente de la précédente
                 {
                     MenuActivity.tcpServeur.sendData(_speechToText._voiceListener._varSpeech); //On envoie la phrase prononcée au client.

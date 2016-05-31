@@ -5,6 +5,8 @@ using System.Threading;
 using Android.Media;
 using Android.Widget;
 using Android.Content;
+using Android.Net;
+using Java.IO;
 using Tcp;
 
 //ATTENTION REVOIR PASSAGE PUT EXTRA POUR DECROCHER
@@ -19,6 +21,7 @@ namespace InterphoneSAM
         private Button buttonPickUp;
         private Button buttonHangUp;
         private ImageView _imageVisitor;
+        private ProgressBar _pgBar;
         MediaPlayer mPlayer = null;
         private string _choice;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -30,8 +33,11 @@ namespace InterphoneSAM
             SetContentView(Resource.Layout.Wait_Activity);
 
             _choice = Intent.GetStringExtra("choice");
+
             buttonPickUp = FindViewById<Button>(Resource.Id.buttonPickUp);
             _imageVisitor = FindViewById<ImageView>(Resource.Id.imageVisitor);
+            _pgBar = FindViewById<ProgressBar>(Resource.Id.progressBar1);
+
             _imageVisitor.Visibility = Android.Views.ViewStates.Invisible;
             buttonPickUp.Visibility = Android.Views.ViewStates.Invisible;
             buttonPickUp.Click += new EventHandler(pickUpAction);
@@ -39,6 +45,8 @@ namespace InterphoneSAM
             buttonHangUp = FindViewById<Button>(Resource.Id.buttonHangUp);
             buttonHangUp.Visibility = Android.Views.ViewStates.Invisible;
             buttonHangUp.Click += new EventHandler(HangUpAction);
+
+            _pgBar.Visibility = Android.Views.ViewStates.Visible;
 
             _updateTextToReceive = new Thread(updateTextToReceiveFunction);
             _updateTextToReceive.Start();
@@ -48,12 +56,13 @@ namespace InterphoneSAM
         private void HangUpAction(object sender, EventArgs e)
         {
             mPlayer.Stop();
-            MenuActivity.tcpClient.sendText("---RACROCHE---");
+            MenuActivity.tcpClient.sendText("---RACCROCHE---");
             MenuActivity.tcpClient.cleanBuffer();
             keepThread = true;
             buttonHangUp.Visibility = Android.Views.ViewStates.Invisible;
             buttonPickUp.Visibility = Android.Views.ViewStates.Invisible;
             _imageVisitor.Visibility = Android.Views.ViewStates.Invisible;
+            _pgBar.Visibility = Android.Views.ViewStates.Visible;
             
         }
 
@@ -117,6 +126,7 @@ namespace InterphoneSAM
         {
             buttonPickUp.Visibility = Android.Views.ViewStates.Visible;
             buttonHangUp.Visibility = Android.Views.ViewStates.Visible;
+            _pgBar.Visibility = Android.Views.ViewStates.Invisible;
             recupererImage();
             _imageVisitor.Visibility = Android.Views.ViewStates.Visible;
 
@@ -133,7 +143,9 @@ namespace InterphoneSAM
 
         private void recupererImage()
         {
-           // _imageVisitor.SetImageURI=@""
+            File image = new File("/storage/emulated/0/Android/data/InterphoneSAM.InterphoneSAM/files/DSC_0001.JPG");
+            Thread.Sleep(2);   //Pour être certains d'avoir chargé l'image...     
+            _imageVisitor.SetImageURI(Android.Net.Uri.FromFile(image));
         }
     }
 }

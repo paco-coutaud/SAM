@@ -80,14 +80,14 @@ namespace InterphoneSAM
 			// aapt resource value: 0x7f060001
 			public const int hangUp = 2131099649;
 			
-			// aapt resource value: 0x7f060008
-			public const int imageVisitor = 2131099656;
+			// aapt resource value: 0x7f060009
+			public const int imageVisitor = 2131099657;
 			
 			// aapt resource value: 0x7f06000a
 			public const int linearLayout1 = 2131099658;
 			
-			// aapt resource value: 0x7f060009
-			public const int progressBar1 = 2131099657;
+			// aapt resource value: 0x7f060008
+			public const int progressBar1 = 2131099656;
 			
 			// aapt resource value: 0x7f060003
 			public const int sendTextButton = 2131099651;
